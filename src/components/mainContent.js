@@ -5,18 +5,17 @@ import Trending from "./mainContentComponents/trending";
 import Latest from "./mainContentComponents/latest";
 import Company from "./mainContentComponents/company";
 
+
 const MainContent = () => {
     return (
-        <BrowserRouter>
-        <div className="wrapper">
-          <MainContentNavbar />
-          <Switch>
-            <Route exact path='/' component={Trending}/>
-            <Route path='/latest' component={Latest} />
-            <Route path='/company' component={Company} />
-          </Switch>
-        </div>
-      </BrowserRouter>
+      <div className="wrapper">
+        <MainContentNavbar />
+        <Switch>
+          <Route exact path='/home/latest' component={Latest} />
+          <Route exact path='/home/company' component={Company} />
+          <Route exact path='/home/trending' component={Trending}/>
+        </Switch>
+      </div>
     )
 }
 
