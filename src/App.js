@@ -18,9 +18,10 @@ import Account from "./components/userSettingsComponents/account";
 import Notification from "./components/userSettingsComponents/notification";
 import Interests from "./components/userSettingsComponents/interests";
 import Privacy from "./components/userSettingsComponents/privacy";
-
+// CREATE PROFILE FOR NEW USER
 import CreateProfile from './components/registeredUserComponents/createProfile'
-
+// MAIN PAGE COMPONENT
+import Activity from './components/mainPageComponents/activity'
 
 const App = () => {
   return (
@@ -53,6 +54,8 @@ const App = () => {
                 <Route path='/userSettingsComponents/userSettings/interests' component={Interests}/>
                 <Route path='/userSettingsComponents/userSettings/privacy' component={Privacy}/>
                 <Route path='/create-profile' component={CreateProfile} />
+                {/* MAIN PAGE COMPONENTS */}
+                <Route path="/activity" component={Activity} />
               </Switch>
               <FooterSection />
               </>

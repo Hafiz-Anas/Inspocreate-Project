@@ -1,5 +1,5 @@
 import React from 'react'
-import userIcon from "./icons/Oval Copy.svg";
+import userIcon from "./icons/Oval Copy222.svg";
 import plusIcon from "./icons/Shape Copy 21.svg";
 import likeIcon from "./icons/Path Copy 47.svg";
 

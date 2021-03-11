@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import userIcon from './icons/Shape.png'
 import userIconMini from './icons/Group 1203.png'
-import FollowSuggestions from '../mainContentComponents/trending'
+import userPostImg from '../../Imgs/bg.jpg'
+import userIcon2 from "../../Imgs/Oval Copy.svg";
 
 class MasterForm extends Component {
     constructor(props) {
@@ -52,7 +53,7 @@ class MasterForm extends Component {
         if (currentStep < 3) {
             return (
                 <div className="wrapper">
-                    <span className="text-end" type="button" onClick={this._next}>Skip for now</span>
+                    <p className="text-end" type="button" onClick={this._next}>Skip for now</p>
                 </div>  
             )
         }
@@ -63,7 +64,7 @@ class MasterForm extends Component {
         return (
             <React.Fragment>
                 <h1 className='text-center create-profile-heading'>Complet Your Profile</h1>
-                <p>Step {this.state.currentStep} </p>
+                <p className="text-center p-3">Step {this.state.currentStep} </p>
 
                 <form onSubmit={this.handleSubmit}>
                     {/* 
@@ -155,7 +156,175 @@ function Step3(props) {
     return (
         <div className="wrapper step-three">
             <h1>Based on Your Profile We Recommend You to Follow These People</h1>
-            <FollowSuggestions />
+            <div className="follow-suggestions">
+                <div className="suggestion">
+                    <div className="user-details">
+                        <div className="user-icon-name">
+                          <div className="user-img">
+                            <img src={userIcon2} />
+                          </div>
+                          <div className="user-name">
+                            <h1>Motivation Company</h1>
+                            <p>motivationtoday</p>
+                          </div>
+                        </div>
+                        <div className="user-follow">
+                            <button>Follow</button>
+                        </div>
+                    </div>
+                    <div className="user-post">
+                        <img src={userPostImg} />
+                    </div>
+                </div>
+                <div className="suggestion">
+                    <div className="user-details">
+                        <div className="user-icon-name">
+                          <div className="user-img">
+                            <img src={userIcon2} />
+                          </div>
+                          <div className="user-name">
+                            <h1>Motivation Company</h1>
+                            <p>motivationtoday</p>
+                          </div>
+                        </div>
+                        <div className="user-follow">
+                            <button>Follow</button>
+                        </div>
+                    </div>
+                    <div className="user-post">
+                        <img src={userPostImg} />
+                    </div>
+                </div><div className="suggestion">
+                    <div className="user-details">
+                        <div className="user-icon-name">
+                          <div className="user-img">
+                            <img src={userIcon2} />
+                          </div>
+                          <div className="user-name">
+                            <h1>Motivation Company</h1>
+                            <p>motivationtoday</p>
+                          </div>
+                        </div>
+                        <div className="user-follow">
+                            <button>Follow</button>
+                        </div>
+                    </div>
+                    <div className="user-post">
+                        <img src={userPostImg} />
+                    </div>
+                </div><div className="suggestion">
+                    <div className="user-details">
+                        <div className="user-icon-name">
+                          <div className="user-img">
+                            <img src={userIcon2} />
+                          </div>
+                          <div className="user-name">
+                            <h1>Motivation Company</h1>
+                            <p>motivationtoday</p>
+                          </div>
+                        </div>
+                        <div className="user-follow">
+                            <button>Follow</button>
+                        </div>
+                    </div>
+                    <div className="user-post">
+                        <img src={userPostImg} />
+                    </div>
+                </div><div className="suggestion">
+                    <div className="user-details">
+                        <div className="user-icon-name">
+                          <div className="user-img">
+                            <img src={userIcon2} />
+                          </div>
+                          <div className="user-name">
+                            <h1>Motivation Company</h1>
+                            <p>motivationtoday</p>
+                          </div>
+                        </div>
+                        <div className="user-follow">
+                            <button>Follow</button>
+                        </div>
+                    </div>
+                    <div className="user-post">
+                        <img src={userPostImg} />
+                    </div>
+                </div><div className="suggestion">
+                    <div className="user-details">
+                        <div className="user-icon-name">
+                          <div className="user-img">
+                            <img src={userIcon2} />
+                          </div>
+                          <div className="user-name">
+                            <h1>Motivation Company</h1>
+                            <p>motivationtoday</p>
+                          </div>
+                        </div>
+                        <div className="user-follow">
+                            <button>Follow</button>
+                        </div>
+                    </div>
+                    <div className="user-post">
+                        <img src={userPostImg} />
+                    </div>
+                </div><div className="suggestion">
+                    <div className="user-details">
+                        <div className="user-icon-name">
+                          <div className="user-img">
+                            <img src={userIcon2} />
+                          </div>
+                          <div className="user-name">
+                            <h1>Motivation Company</h1>
+                            <p>motivationtoday</p>
+                          </div>
+                        </div>
+                        <div className="user-follow">
+                            <button>Follow</button>
+                        </div>
+                    </div>
+                    <div className="user-post">
+                        <img src={userPostImg} />
+                    </div>
+                </div><div className="suggestion">
+                    <div className="user-details">
+                        <div className="user-icon-name">
+                          <div className="user-img">
+                            <img src={userIcon2} />
+                          </div>
+                          <div className="user-name">
+                            <h1>Motivation Company</h1>
+                            <p>motivationtoday</p>
+                          </div>
+                        </div>
+                        <div className="user-follow">
+                            <button>Follow</button>
+                        </div>
+                    </div>
+                    <div className="user-post">
+                        <img src={userPostImg} />
+                    </div>
+                </div><div className="suggestion">
+                    <div className="user-details">
+                        <div className="user-icon-name">
+                          <div className="user-img">
+                            <img src={userIcon2} />
+                          </div>
+                          <div className="user-name">
+                            <h1>Motivation Company</h1>
+                            <p>motivationtoday</p>
+                          </div>
+                        </div>
+                        <div className="user-follow">
+                            <button>Follow</button>
+                        </div>
+                    </div>
+                    <div className="user-post">
+                        <img src={userPostImg} />
+                    </div>
+                </div>
+            </div>
+            <div className="text-center">
+                <button className="common-style-btn profile-done">You are Done</button>
+            </div>
         </div>
     );
 }
