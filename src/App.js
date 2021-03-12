@@ -23,6 +23,9 @@ import CreateProfile from './components/registeredUserComponents/createProfile'
 // MAIN PAGE COMPONENT
 import Activity from './components/mainPageComponents/activity'
 
+// UPLOADED POST
+import UploadedPost from './components/uploadedPost'
+
 const App = () => {
   return (
     <div className='app'>
@@ -56,6 +59,8 @@ const App = () => {
                 <Route path='/create-profile' component={CreateProfile} />
                 {/* MAIN PAGE COMPONENTS */}
                 <Route path="/activity" component={Activity} />
+                {/* UPLOADED POST */}
+                <Route path="/uploadedPost" component={UploadedPost} />
               </Switch>
               <FooterSection />
               </>

@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react'
-import { NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState } from 'react'
+import { NavLink, useHistory } from "react-router-dom";
 import logoImg from '../Imgs/Group.svg'
 import searchIcon from '../Imgs/Shape.svg'
 import HomeIcon from "../Imgs/Path.svg";
@@ -14,52 +14,110 @@ import { Modal, Button, Dropdown } from "react-bootstrap";
 import axios from 'axios';
 import { AuthContext } from '../context/auth';
 
+const TagComponent = props => {
+  return (
+    <div className="tagComponent">
+      <div className="tagComponent__text" >{props.text}</div>
+      <div className="tagComponent__close" onClick={() => { props.cullTagFromTags(props.text) }}>X</div>
+    </div>
+  )
+}
 
 const MainNavbar = () => {
   const context = useContext(AuthContext)
-  const [show, setShow] = useState(false);
-  const [postType, setPostType] = useState('image')
-  const [imageType, setimageType] = useState('localImage')
-  const [blogType, setblogType] = useState('localBlog')
-  const [postState , setPostState] = useState({
-    "title": "",
-    "description": "",
-    "categories": [
-      
-    ],
-    "url": "",
-    "image": null,
-    "tags": [
-      
-    ],
-    "public": true,
-    "collection": true,
-    "postType": ""
-  })
 
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [postType, setPostType] = useState('Image')
+  const [imageType, setimageType] = useState('localImage')
+  const [blogType, setblogType] = useState('localBlog')
+  const [categories, setCategories] = useState([])
+  const [postState, setPostState] = useState({
+    "title": "",
+    "description": "",
+    "categories": ["anas"],
+    "url": undefined,
+    "image": null,
+    "tags": [
+
+    ],
+    "public": true,
+    "collection": true,
+    "postType": "Image"
+  })
+  const history = useHistory();
+
   const onChangeFile = (event) => {
+    console.log(event);
     console.log(context)
     const formData = new FormData();
     formData.append('file', event.target.files[0])
     axios.post('https://api-dev.inspocreate.com/media', formData, {
       headers: {
-        Authorization: "Bearer "+context.state.token
+        Authorization: "Bearer " + context.state.token
       }
     })
-    .then(response => {
-      setPostState({
-        ...postState,
-        image:response.data.path
-      })
-      console.log(response)
-    }).catch((error)=>{
-      console.error(error.response)
-    });
+      .then(response => {
+        setPostState({
+          ...postState,
+          image: response.data.path
+        })
+        console.log(response)
+      }).catch((error) => {
+        console.error(error.response)
+      });
   }
 
+  useEffect(() => {
+    axios.get('https://api-dev.inspocreate.com/categories')
+      .then(response => {
+        setCategories(response.data)
+      })
+      .catch(error => {
+        console.error(error.response)
+      })
+  }, [])
+
+  const pushPost = (e) => {
+    e.preventDefault();
+    axios.post('https://api-dev.inspocreate.com/posts/create', { ...postState, postType: postType, categories: [categories[0].id] }, {
+      headers: {
+        Authorization: "Bearer " + context.state.token
+      }
+    })
+      .then(response => {
+        history.push('/uploadedPost')
+        console.log(response)
+      }).catch((error) => {
+        console.error(error.response)
+      });
+  }
+
+
+  useEffect(() => {
+    if(context.state){
+      setShow(false)
+    }
+  }, [context])
+
+  // TAGS IN INPUT
+
+  const [tags, setTags] = React.useState(['JavaScript', 'TypeScript'])
+  const inputRef = React.useRef();
+  const [inputValue, setInputValue] = React.useState('')
+
+  const inputValueChangeHandler = inputChange => {
+    setInputValue(inputChange);
+    if (inputChange[inputChange.length - 1] === ',') {
+      setTags([...tags, inputChange.slice(0, inputChange.length - 1)]);
+      setInputValue('');
+    }
+  }
+  const cullTagFromTags = (tag) => {
+    setTags([...tags.filter(element => element !== tag)])
+  }
   return (
     <div>
       <div className="main-navbar">
@@ -97,26 +155,23 @@ const MainNavbar = () => {
           </div>
         </div>
       </div>
-      <span class="material-icons">
-        radio_button_unchecked
-</span>
-      {/* ADD POST MODAL */}
+      {/*********** ADD POST MODAL **********/}
       <Modal size="lg" show={show} className="add-post-modal" onHide={handleClose} centered>
         <div class="add-post-container">
           <buttton onClick={handleClose} class="remvoe-post-modal">&times;</buttton>
           <h1 className="text-center pb-5 pt-0">Add New Post</h1>
           <div className="post-types">
-            <button type="button" onClick={() => setPostType('image')}>Image</button>
-            <button type="button" onClick={() => setPostType('blog')}>Blog</button>
+            <button type="button" onClick={() => setPostType('Image')}>Image</button>
+            <button type="button" onClick={() => setPostType('Blog')}>Blog</button>
           </div>
           <div>
-            {postType === 'image' && <>
+            {postType === 'Image' && <>
               <div className="file-type">
                 <button type="button" onClick={() => setimageType('localImage')}><span class="material-icons">radio_button_unchecked</span>Add Image</button>
                 <button type="button" onClick={() => setimageType('urlImage')}><span class="material-icons">radio_button_unchecked</span>Add Image from URL</button>
               </div>
               {imageType === 'localImage' && <>
-                <form className="add-post-form">
+                <form className="add-post-form" onSubmit={pushPost}>
                   {!postState.image && (
                     <label className="add-img">
                       <img src={plusIcontwo} />
@@ -134,10 +189,9 @@ const MainNavbar = () => {
                   <div className="input-post">
                     <label htmlFor="category">Categories</label>
                     <select name="category" className="select-type">
-                      <option value="Women Empowerment">Women Empowerment</option>
-                      <option value="Life Style">Life Style</option>
-                      <option value="Empowerment">Empowerment</option>
-                      <option value="audi">Audi</option>
+                      {categories.map(item => (
+                        <option value={item.id}>{item.title}</option>
+                      ))}
                     </select>
                   </div>
                   <div className="input-post">
@@ -146,7 +200,12 @@ const MainNavbar = () => {
                   </div>
                   <div className="input-post">
                     <label htmlFor="tags">Add Tags</label>
-                    <input type="text" />
+                    <div className="tagArea">
+                      <div className='tagArea__displayArea'>
+                        {tags.map(tag => <TagComponent text={tag} cullTagFromTags={cullTagFromTags} />)}
+                      </div>
+                      <input type='text' ref={inputRef} value={inputValue} onChange={event => inputValueChangeHandler(event.target.value)} placeholder='separated by commas' className="tagArea__input" />
+                    </div>
                   </div>
                   <div className="submit-btn">
                     <button type="submit">I Would Like to Post Now</button>
@@ -185,7 +244,7 @@ const MainNavbar = () => {
                 </form>
               </>}
             </>}
-            {postType === 'blog' && <>
+            {postType === 'Blog' && <>
               <div className="file-type">
                 <button type="button" onClick={() => setblogType('localBlog')}><span class="material-icons">radio_button_unchecked</span>Add Blog</button>
                 <button type="button" onClick={() => setblogType('urlBlog')}><span class="material-icons">radio_button_unchecked</span>Add Blog from URL</button>

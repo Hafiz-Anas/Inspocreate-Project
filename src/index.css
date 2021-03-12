@@ -393,6 +393,7 @@ p {margin: 0;padding: 0;}
 .input-post input:focus, textarea:focus {
   box-shadow: none !important;
 }
+
 .submit-btn button {
   background-color: #7F6AEE;
   font-size: 16px;
@@ -1016,7 +1017,7 @@ input:checked + .slider:before {
 .like p {font-size: 10px;padding-top: 16px;}
 /*******MAIN PAGES*******/
 /*ACTIVITY*/
-.activity {
+.activity, .uploaded-post {
   display: grid;
   grid-template-columns: 3.2fr 1.7fr;
   grid-gap: 1rem;
@@ -1075,22 +1076,22 @@ input:checked + .slider:before {
   font-size: 14px;
   color: #5C5F64;
 }
-.scroll-posts .post-res {
+.scroll-post .post-res {
   padding: 22px 5px;
   display: flex;
 }
-.scroll-posts .post-res p:nth-child(2) {
+.scroll-post .post-res p:nth-child(2) {
   border-left: 1px solid #E0E3E7;
   border-right: 1px solid #E0E3E7;
 }
-.scroll-posts .post-res p {
+.scroll-post .post-res p {
   padding: 0px 20px;
   cursor: pointer;
 }
-.scroll-posts .post-res p img{
+.scroll-post .post-res p img{
   padding-right: 10px;
 }
-.should-follow {
+.activity .should-follow {
   border: 1px solid #E0E3E7;
   box-shadow: 0px 6px 10px rgba(131, 134, 163, .12);
   padding: 20px;
@@ -1099,8 +1100,14 @@ input:checked + .slider:before {
 .should-follow h2 {
   font-size: 22px;
 }
-.should-follow .user-details {
+.activity .should-follow .user-details {
   border-top: .5px solid #E0E3E7;
   border-bottom: .5px solid #E0E3E7;
   padding: 13px 8px;
+}
+.uploaded-post .user-details {
+  box-shadow: 0px 6px 10px rgba(131, 134, 163, .12);
+  border: 1px solid #E0E3E7;
+  padding: 13px 8px;
+  border-radius: 4px;
 }
