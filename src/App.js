@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter } from "react-router-dom";
-import MainNavbar from './components/logoutNavbar'
-import MainNavbarTwo from './components/loginNavbar'
+import MainNavbar from './components/logoutNavbar/logoutNavbar'
+import MainNavbarTwo from './components/loginNavbar/loginNavbar'
 import FooterSection from './components/footer'
 import { Switch, Route } from "react-router-dom";
 import { AuthContextProvider, AuthContext } from "./context/auth";

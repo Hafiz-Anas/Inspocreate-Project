@@ -1,16 +1,20 @@
 import React, {useState, useContext, useEffect} from 'react'
 import {NavLink, useHistory} from 'react-router-dom'
-import logoImg from '../Imgs/Group.svg'
-import searchIcon from '../Imgs/Shape.svg'
-import lockIcon from '../Imgs/Shape-2.svg'
-import fbIcon from '../Imgs/Fill 1.svg'
-import gIcon from '../Imgs/Grou.svg'
-import companyIcon from '../Imgs/urs path.svg'
-import personIcon from '../Imgs/our path.svg'
-import robot from "../Imgs/Bitmap.svg";
+import logoImg from '../../Imgs/Group.svg'
+import searchIcon from '../../Imgs/Shape.svg'
+import lockIcon from '../../Imgs/Shape-2.svg'
+import fbIcon from '../../Imgs/Fill 1.svg'
+import gIcon from '../../Imgs/Grou.svg'
+import companyIcon from '../../Imgs/urs path.svg'
+import personIcon from '../../Imgs/our path.svg'
+import robot from "../../Imgs/Bitmap.svg";
 import { Modal, Button } from "react-bootstrap";
 import axios from 'axios'
-import {AuthContext} from '../context/auth'
+import {AuthContext} from '../../context/auth'
+
+// SUB COMPONENTS
+import LoginModal from "./components/loginModal";
+import  RegistrationModal from "./components/registration";
 
 
 const MainNavbar = () => {

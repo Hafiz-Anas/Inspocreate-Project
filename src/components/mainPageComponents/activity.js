@@ -50,8 +50,6 @@ const Activity = () => {
 
     }, []);
 
-
-
     return (
         <div className="wrapper">
             <Slider />
