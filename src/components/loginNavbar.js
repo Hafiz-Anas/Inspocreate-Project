@@ -26,14 +26,17 @@ const TagComponent = props => {
 const MainNavbar = () => {
   const context = useContext(AuthContext)
 
+  // MODAL FOR CREATE POST
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // STATES FOR POSTTYPE
   const [postType, setPostType] = useState('Image')
   const [imageType, setimageType] = useState('localImage')
   const [blogType, setblogType] = useState('localBlog')
-  const [categories, setCategories] = useState([])
+
+  // API FOR FORM DATA FOR CREATE POST
   const [postState, setPostState] = useState({
     "title": "",
     "description": "",
@@ -70,6 +73,8 @@ const MainNavbar = () => {
       });
   }
 
+  // API FOR SELECT CATEGORIES
+  const [categories, setCategories] = useState([])
   useEffect(() => {
     axios.get('https://api-dev.inspocreate.com/categories')
       .then(response => {
@@ -80,6 +85,8 @@ const MainNavbar = () => {
       })
   }, [])
 
+
+  // API FOR CREATE POST
   const pushPost = (e) => {
     e.preventDefault();
     axios.post('https://api-dev.inspocreate.com/posts/create', { ...postState, postType: postType, categories: [categories[0].id] }, {
@@ -95,15 +102,20 @@ const MainNavbar = () => {
       });
   }
 
-
   useEffect(() => {
     if(context.state){
       setShow(false)
     }
   }, [context])
 
-  // TAGS IN INPUT
+  // FUNCTION FOR USER LOGOUT
 
+  const logoutUser = () => {
+    console.log('user log out')
+    context.actions.updateState(null)
+  }
+
+  // TAGS IN INPUT
   const [tags, setTags] = React.useState(['JavaScript', 'TypeScript'])
   const inputRef = React.useRef();
   const [inputValue, setInputValue] = React.useState('')
@@ -148,7 +160,7 @@ const MainNavbar = () => {
                 <Dropdown.Menu>
                   <Dropdown.Item className="dropdown-item" href="/userSection/userProfile">Profile</Dropdown.Item>
                   <Dropdown.Item className="dropdown-item" href="/userSettingsComponents/userSettings">Setting</Dropdown.Item>
-                  <Dropdown.Item className="dropdown-item" href="#/action-3">Logout</Dropdown.Item>
+                  <Dropdown.Item className="dropdown-item" onClick={logoutUser}>Logout</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </ul>

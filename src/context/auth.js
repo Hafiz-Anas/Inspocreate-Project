@@ -8,14 +8,13 @@ export const AuthContext = createContext({
 });
 
 export class AuthContextProvider extends Component {
-    state = null
     constructor(props) {
         super(props)
         const user = localStorage.getItem('currentUser')
         if(user){
             try {
                 const userObject = JSON.parse(user)
-                this.setState(userObject)
+                this.state = userObject
             } catch (e) {
                 console.log(e)
             }

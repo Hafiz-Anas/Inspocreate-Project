@@ -7,7 +7,7 @@ import addIcon from "../Imgs/Path Copy 47.svg";
 import userIcon2 from "../Imgs/Oval Copy.svg";
 
 
-export const UploadedPost = () => {
+const UploadedPost = () => {
     return (
         <div className="uploaded-post wrapper">
             <div className="your-post">
