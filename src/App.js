@@ -1,30 +1,21 @@
 import React from 'react'
 import { BrowserRouter } from "react-router-dom";
-import MainNavbar from './components/logoutNavbar/logoutNavbar'
-import MainNavbarTwo from './components/loginNavbar/loginNavbar'
-import FooterSection from './components/footer'
+import MainNavbar from './components/navbarBeforeLogin'
+import MainNavbarTwo from './components/navbarAfterLogin'
+import {Footer} from './components'
 import { Switch, Route } from "react-router-dom";
 import { AuthContextProvider, AuthContext } from "./context/auth";
-import Home from './views/Home'
+// VIEWS
+import { Home } from './views'
+import { Activity } from './views'
 // USER PROFILE
-import UserProfile  from './components/userSection/userProfile';
-import Followers from "./components/userSection/followers";
-import Following from "./components/userSection/following";
-import Collection from "./components/userSection/collection";
+import UserProfile  from './components/userProfile/userProfile';
 // USER SETTINGS
-import UserSettings from './components/userSettingsComponents/userSettings'
-import UserSettingsNavbar from "./components/userSettingsComponents/userSettingsNavbar";
-import Account from "./components/userSettingsComponents/account";
-import Notification from "./components/userSettingsComponents/notification";
-import Interests from "./components/userSettingsComponents/interests";
-import Privacy from "./components/userSettingsComponents/privacy";
+import UserSettings from './components/userSettings/userSettings'
 // CREATE PROFILE FOR NEW USER
-import CreateProfile from './components/registeredUserComponents/createProfile'
-// MAIN PAGE COMPONENT
-import Activity from './components/mainPageComponents/activity'
-
+import CreateProfile from './components/registeredUser/'
 // UPLOADED POST
-import UploadedPost from './components/uploadedPost'
+import UploadedPost from './components/navbarAfterLogin/components/addPostModal/components/uploadedPost'
 
 const App = () => {
   return (
@@ -41,28 +32,19 @@ const App = () => {
               {!!value.state && (
                 <MainNavbarTwo />
               )}
-              {/* <Home /> */}
               <Switch>
                 <Route path='/home' component={Home}/>
+                <Route path='/Activity' component={Activity}/>
                 {/* USER PROFILE */}
-                <Route exact path='/userSection/userProfile' component={UserProfile} />
-                <Route exact path='/userSection/userProfile/followers' component={Followers} />
-                <Route path='/userSection/userProfile/following' component={Following} />
-                <Route path='/userSection/userProfile/collection' component={Collection}/>
+                <Route path='/userProfile' component={UserProfile} />
                 {/* USER SETTINGS */}
-                <Route exact path='/userSettingsComponents/userSettings' component={UserSettings} />
-                <Route exact path='/userSettingsComponents/userSettings/userSettingsNavbar' component={UserSettingsNavbar} />
-                <Route path='/userSettingsComponents/userSettings/account' component={Account} />
-                <Route path='/userSettingsComponents/userSettings/notification' component={Notification}/>
-                <Route path='/userSettingsComponents/userSettings/interests' component={Interests}/>
-                <Route path='/userSettingsComponents/userSettings/privacy' component={Privacy}/>
+                <Route path='/userSettings' component={UserSettings} />
+                {/* CREATE PROFILE */}
                 <Route path='/create-profile' component={CreateProfile} />
-                {/* MAIN PAGE COMPONENTS */}
-                <Route path="/activity" component={Activity} />
                 {/* UPLOADED POST */}
                 <Route path="/uploadedPost" component={UploadedPost} />
               </Switch>
-              <FooterSection />
+              <Footer />
               </>
             )
           }}
