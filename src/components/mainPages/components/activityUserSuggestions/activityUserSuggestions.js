@@ -1,33 +1,21 @@
 import {useState, useEffect, useContext} from 'react'
-import { AuthContext } from '../../../../context/auth';
-import axios from '../../../../axios';
-
+import {getUserSuggestions} from '../../../../reducers'
+import {useSelector, useDispatch} from 'react-redux'
 
 const ActivityUserSuggestions = () => {
-    const context = useContext(AuthContext)
-    //GET USES TO FOLLOWERS API
-    const [suggestions, setSuggestions] = useState([])
+    const state = useSelector(state => state.userSuggestions)
 
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        axios.post('/users/suggestions', {}, {
-            headers: {
-                Authorization: "Bearer " + context.state.token
-            }
-        })
-            .then(response => {
-                console.log(response)
-                setSuggestions(response.data)
-            }).catch(error => {
-                console.error(error)
-            })
-
+        dispatch(getUserSuggestions())
     }, []);
+
     return (
         <div>
             <div className="should-follow">
                 <h2>You Should Follow</h2>
-                {suggestions.map(item => (
+                {state.data.map(item => (
                     <div className="user-details">
                         <div className="user-icon-name">
                             <div className="user-img">

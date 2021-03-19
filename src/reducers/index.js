@@ -1,1 +1,2 @@
-export {default} from './rootReducers'
+export * from './posts'
+export * from './userSuggestions'
