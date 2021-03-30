@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const Followers = () => {
-    return (
-        <div>
-            <h1 className="wrapper user-heading">Followers</h1>    
-        </div>
-    )
-}
+	return (
+		<div>
+			<h1 className='wrapper user-heading'>Followers</h1>
+		</div>
+	);
+};
 
-export default Followers
+export default Followers;

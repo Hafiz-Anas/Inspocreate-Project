@@ -1,1 +1,1 @@
-export {default} from './axios'
+export { default } from './axios';

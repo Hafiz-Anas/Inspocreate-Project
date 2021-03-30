@@ -1,39 +1,59 @@
-import React, { Component } from "react";
-import Slider from "react-slick";
+import React, { useEffect } from 'react';
+import Slider from 'react-slick';
+import NextArrow from './nextArrow';
+import PrevArrow from './prevArrow';
+import checkIcon from '../../../assets/Imgs/checked.svg';
+import clsx from 'clsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategories, selectCategories } from '../../../reducers';
 
-export default class SwipeToSlide extends Component {
-  render() {
-    const settings = {
-      className: "center",
-      infinite: true,
-      centerPadding: "60px",
-      slidesToShow: 5,
-      swipeToSlide: true,
-      afterChange: function(index) {}
-    };
-    return (
-      <div className="header-slider">
-        <Slider {...settings}>
-          <div>
-            <h3>Women Empowerment</h3>
-          </div>
-          <div>
-            <h3>Empowerment</h3>
-          </div>
-          <div>
-            <h3>Life Style</h3>
-          </div>
-          <div>
-            <h3>Confident</h3>
-          </div>
-          <div>
-            <h3>Health and Fitness</h3>
-          </div>
-          <div>
-            <h3>Motivation/ Inspiration</h3>
-          </div>
-        </Slider>
-      </div>
-    );
-  }
-}
+const SwipeToSlide = () => {
+	const categoriesState = useSelector((state) => state.categories);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getCategories());
+	}, []);
+
+	const handleClick = (id) => {
+		dispatch(selectCategories(id));
+	};
+
+	const isSelected = (id) => {
+		return categoriesState.selected.includes(id);
+	};
+
+	const settings = {
+		className: 'center',
+		infinite: true,
+		centerPadding: '',
+		slidesToShow: 5,
+		swipeToSlide: true,
+		afterChange: function (index) {},
+		nextArrow: <NextArrow />,
+		prevArrow: <PrevArrow />,
+	};
+	return (
+		<div className='header-slider'>
+			<Slider {...settings}>
+				{categoriesState.data.map((item) => {
+					return (
+						<div>
+							<button
+								className={clsx({
+									'checked-btn': isSelected(item.id),
+								})}
+								onClick={() => handleClick(item.id)}
+								key={item.id}
+							>
+								{isSelected(item.id) && <img src={checkIcon} />}
+								{item.title}
+							</button>
+						</div>
+					);
+				})}
+			</Slider>
+		</div>
+	);
+};
+
+export default SwipeToSlide;

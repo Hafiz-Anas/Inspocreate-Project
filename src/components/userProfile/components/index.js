@@ -1,2 +1,2 @@
-export  {default as UpdatePics} from './updatePics'
-export  {default as userNavbar} from './userNavbar'
+export { default as UpdatePics } from './updatePics';
+export { default as userNavbar } from './userNavbar';

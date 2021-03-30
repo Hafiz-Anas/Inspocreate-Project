@@ -1,1 +1,1 @@
-export {default} from './activityUserSuggestions'
+export { default } from './activityUserSuggestions';

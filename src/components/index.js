@@ -1,9 +1,9 @@
-export {default as Footer} from './footer'
-export {default as Header} from './header'
-export {default as MainContent} from './mainContent'
-export {default as MainPages} from './mainPages'
-export {default as NavbarAfterLogin} from './navbarAfterLogin'
-export {default as NavbarBeforeLogin} from './navbarBeforeLogin'
-export {default as RegisteredUser} from './registeredUser'
-export {default as UserProfile} from './userProfile'
-export {default as UserSettings} from './userSettings'
+export { default as Footer } from './footer';
+export { default as Header } from './header';
+export { default as MainContent } from './mainContent';
+export { default as MainPages } from './mainPages';
+export { default as NavbarAfterLogin } from './navbarAfterLogin';
+export { default as NavbarBeforeLogin } from './navbarBeforeLogin';
+export { default as RegisteredUser } from './registeredUser';
+export { default as UserProfile } from './userProfile';
+export { default as UserSettings } from './userSettings';

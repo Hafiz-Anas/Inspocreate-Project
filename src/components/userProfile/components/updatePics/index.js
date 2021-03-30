@@ -1,1 +1,1 @@
-export {default} from './updatePics'
+export { default } from './updatePics';

@@ -1,1 +1,1 @@
-export {default} from './activityPsots'
+export { default } from './activityPsots';

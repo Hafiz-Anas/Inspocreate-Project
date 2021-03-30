@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const Collection = () => {
-    return (
-        <div>
-            <h1 className="wrapper user-heading">Collections</h1>    
-        </div>
-    )
-}
+	return (
+		<div>
+			<h1 className='wrapper user-heading'>Collections</h1>
+		</div>
+	);
+};
 
-export default Collection
+export default Collection;

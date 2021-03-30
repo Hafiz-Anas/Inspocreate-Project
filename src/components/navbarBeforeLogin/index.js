@@ -1,1 +1,1 @@
-export {default} from './logoutNavbar';
+export { default } from './logoutNavbar';
