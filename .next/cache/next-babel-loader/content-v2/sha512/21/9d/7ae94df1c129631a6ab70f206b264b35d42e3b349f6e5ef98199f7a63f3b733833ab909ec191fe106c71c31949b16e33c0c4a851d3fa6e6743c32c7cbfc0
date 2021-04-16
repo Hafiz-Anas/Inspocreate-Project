@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './headerSection';","map":{"version":3,"sources":["C:/Users/Digicrym/Documents/inspocreate/src/components/header/index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,iBAAxB","sourcesContent":["export { default } from './headerSection';\n"]},"metadata":{},"sourceType":"module"}

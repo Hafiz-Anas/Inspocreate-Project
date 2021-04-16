@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import plusIcontwo from '../../../../../assets/Imgs/Shape Copy 212.svg';
+import Image from 'next/image';
 import { AuthContext } from '../../../../../context/auth';
 import axios from '../../../../../axios';
 import { useHistory } from 'react-router-dom';
@@ -113,7 +113,12 @@ const UrlPost = () => {
 					<input type='url' placeholder='https://' />
 				</div>
 				<div className='add-img'>
-					<img src={plusIcontwo} />
+					<Image
+						src='/public/images/Shape Copy 212.svg'
+						alt='plusicon'
+						height={100}
+						width={100}
+					/>
 					<p>Add New</p>
 				</div>
 				<div className='input-post'>

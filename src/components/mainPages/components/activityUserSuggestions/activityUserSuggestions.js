@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { getUserSuggestions } from '../../../../reducers';
+import { getUserSuggestions, followThunk } from '../../../../reducers';
 import { useSelector, useDispatch } from 'react-redux';
 
 const ActivityUserSuggestions = () => {
@@ -11,6 +11,9 @@ const ActivityUserSuggestions = () => {
 		dispatch(getUserSuggestions());
 	}, []);
 
+	const followUser = (id) => {
+		dispatch(followThunk(id));
+	};
 	return (
 		<div>
 			<div className='should-follow'>
@@ -29,7 +32,7 @@ const ActivityUserSuggestions = () => {
 							</div>
 						</div>
 						<div className='user-follow'>
-							<button>Follow</button>
+							<button onClick={() => followUser(item.id)}>Follow</button>
 						</div>
 					</div>
 				))}

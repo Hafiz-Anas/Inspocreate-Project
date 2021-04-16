@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './axios';","map":{"version":3,"sources":["C:/Users/Digicrym/Documents/inspocreate/src/axios/index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,SAAxB","sourcesContent":["export { default } from './axios';\n"]},"metadata":{},"sourceType":"module"}

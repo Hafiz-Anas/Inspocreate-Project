@@ -2,62 +2,38 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from '../../../../axios';
 import { AuthContext } from '../../../../context/auth';
-import fbIcon from '../../../../assets/Imgs/Fill 1.svg';
-import gIcon from '../../../../assets/Imgs/Grou.svg';
-import robot from '../../../../assets/Imgs/Bitmap.svg';
-import companyIcon from '../../../../assets/Imgs/urs path.svg';
-import personIcon from '../../../../assets/Imgs/our path.svg';
 import { Modal, Button } from 'react-bootstrap';
+import clsx from 'clsx';
+import Image from 'next/image';
 
 const RegistrationModal = (props) => {
 	const handleCloseJoin = () => props.setShowJoin(false);
-
-	//  //  FORM VALIDATION
-	// const [state, setState] = useState({
-	//   email:'',
-	//   password:''
-	// });
-	// const [errors, setErrors] = useState({
-	//   email:'',
-	//   password:''
-	// });
-	// const handleChange = (event) => {
-	//   setState({
-	//     ...state,
-	//     [event.target.name]: event.target.value
-	//   })
-
-	//   if(event.target.name === 'email'){
-	//     if(event.target.value.indexOf('@') === -1){
-	//       setErrors({
-	//         ...errors,
-	//         email: "Invalid Email Address"
-	//       })
-	//     }else{
-	//       setErrors({
-	//         ...errors,
-	//         email: ""
-	//       })
-	//     }
-	//   }
-	//   if(event.target.name === 'password'){
-	//     if(event.target.value.length < 8){
-	//       setErrors({
-	//         ...errors,
-	//         password: "Please Enter Correct Password"
-	//       })
-	//     }else{
-	//       setErrors({
-	//         ...errors,
-	//         password: ""
-	//       })
-	//     }
-	//   }
-	// }
-
 	const authContext = useContext(AuthContext);
 	const history = useHistory();
 	const [userType, setUserType] = useState('User');
+
+	//  FORM VALIDATION
+	const [state, setState] = useState({
+		firstName: '',
+		lastName: '',
+		email: '',
+		username: '',
+		password: '',
+		cname: '',
+		bType: '',
+		rType: '',
+	});
+	const [errors, setErrors] = useState({
+		firstName: '',
+		lastName: '',
+		email: '',
+		username: '',
+		password: '',
+		cname: '',
+		bType: '',
+		rType: '',
+	});
+
 	const [signupState, setSignupState] = useState({
 		firstName: '',
 		lastName: '',
@@ -68,12 +44,86 @@ const RegistrationModal = (props) => {
 		bType: '',
 		rType: '',
 	});
-	const handleChangej = (e) => {
+	const handleChangej = (event) => {
 		const newState = { ...signupState };
-		newState[e.target.name] = e.target.value;
+		newState[event.target.name] = event.target.value;
 		setSignupState({
 			...newState,
 		});
+
+		setState({
+			...state,
+			[event.target.name]: event.target.value,
+		});
+
+		if (event.target.name === 'firstName') {
+			if (event.target.value.length < 1) {
+				setErrors({
+					...errors,
+					firstName: 'Invalid First Name',
+				});
+			} else {
+				setErrors({
+					...errors,
+					firstName: '',
+				});
+			}
+		}
+
+		if (event.target.name === 'lastName') {
+			if (event.target.value.length < 1) {
+				setErrors({
+					...errors,
+					lastName: 'Invalid Last Name',
+				});
+			} else {
+				setErrors({
+					...errors,
+					lastName: '',
+				});
+			}
+		}
+
+		if (event.target.name === 'cname') {
+			if (event.target.value.length < 1) {
+				setErrors({
+					...errors,
+					cname: 'Invalid Company Name',
+				});
+			} else {
+				setErrors({
+					...errors,
+					cname: '',
+				});
+			}
+		}
+
+		if (event.target.name === 'email') {
+			if (event.target.value.indexOf('@') === -1) {
+				setErrors({
+					...errors,
+					email: 'Invalid Email Address',
+				});
+			} else {
+				setErrors({
+					...errors,
+					email: '',
+				});
+			}
+		}
+		if (event.target.name === 'password') {
+			if (event.target.value.length < 8) {
+				setErrors({
+					...errors,
+					password: 'Please Enter Correct Password',
+				});
+			} else {
+				setErrors({
+					...errors,
+					password: '',
+				});
+			}
+		}
 	};
 	const handleSubmitj = (e) => {
 		e.preventDefault();
@@ -113,12 +163,19 @@ const RegistrationModal = (props) => {
 							<h1>Join Our Community</h1>
 						</div>
 						<div className='user-type'>
-							<button className='person' onClick={() => setUserType('User')}>
-								<img src={personIcon} />
+							<button
+								onClick={() => setUserType('User')}
+								className={clsx({ selected: userType === 'User' })}
+							>
+								<span className='material-icons'>person_pin</span>
 								Individual
 							</button>
-							<button className='company' onClick={() => setUserType('Mentor')}>
-								<img src={companyIcon} />
+							<button
+								className='company'
+								onClick={() => setUserType('Mentor')}
+								className={clsx({ selected: userType === 'Mentor' })}
+							>
+								<span className='material-icons'>file_copy</span>
 								Company
 							</button>
 						</div>
@@ -126,11 +183,19 @@ const RegistrationModal = (props) => {
 							<>
 								<div className='social-login-btns'>
 									<button className='fb-login'>
-										<img src={fbIcon} />
+										<Image
+											src='/public/Images/Fill 1.svg'
+											width={30}
+											height={30}
+										/>
 										Sign Up With Facebook
 									</button>
 									<button className='g-login'>
-										<img src={gIcon} />
+										<Image
+											src='/public/Images/Grou.svg'
+											width={30}
+											height={30}
+										/>
 										Sign Up With Google
 									</button>
 								</div>
@@ -147,6 +212,11 @@ const RegistrationModal = (props) => {
 													placeholder='First Name'
 													onChange={handleChangej}
 												/>
+												{!!errors.firstName && (
+													<small className='text-danger'>
+														{errors.firstName}
+													</small>
+												)}
 											</div>
 											<div className='form-field'>
 												<label htmlFor='name'>Last Name</label>
@@ -156,6 +226,11 @@ const RegistrationModal = (props) => {
 													placeholder='Last Name'
 													onChange={handleChangej}
 												/>
+												{!!errors.lastName && (
+													<small className='text-danger'>
+														{errors.lastName}
+													</small>
+												)}
 											</div>
 										</div>
 										<div className='form-field'>
@@ -166,24 +241,28 @@ const RegistrationModal = (props) => {
 												placeholder='Email'
 												onChange={handleChangej}
 											/>
-											{/* {!!errors.email && (
-                                            <small className="text-danger">{errors.email}</small>
-                                            )} */}
+											{!!errors.email && (
+												<small className='text-danger'>{errors.email}</small>
+											)}
 										</div>
 										<div className='form-field'>
-											<label htmlFor='password'>Email</label>
+											<label htmlFor='password'>password</label>
 											<input
 												type='password'
 												name='password'
 												placeholder='******'
 												onChange={handleChangej}
 											/>
-											{/* {!!errors.password && (
-                                            <small className="text-danger">{errors.password}</small>
-                                        )} */}
+											{!!errors.password && (
+												<small className='text-danger'>{errors.password}</small>
+											)}
 										</div>
 										<div className='login-btns'>
-											<img src={robot} alt='' />
+											<Image
+												src='/public/Images/Bitmap.svg'
+												width={30}
+												height={30}
+											/>
 											<button type='submit'>Continue</button>
 										</div>
 									</form>
@@ -200,11 +279,19 @@ const RegistrationModal = (props) => {
 							<>
 								<div className='social-login-btns'>
 									<button className='fb-login'>
-										<img src={fbIcon} />
+										<Image
+											src='/public/Images/Fill 1.svg'
+											width={30}
+											height={30}
+										/>
 										Sign Up With Facebook
 									</button>
 									<button className='g-login'>
-										<img src={gIcon} />
+										<Image
+											src='/public/Images/Grou.svg'
+											width={30}
+											height={30}
+										/>
 										Sign Up With Google
 									</button>
 								</div>
@@ -216,10 +303,13 @@ const RegistrationModal = (props) => {
 												<label htmlFor='company'>Company Name</label>
 												<input
 													type='name'
-													name='firstName'
+													name='cname'
 													placeholder='Enter Your Company Name'
 													onChange={handleChangej}
 												/>
+												{!!errors.cname && (
+													<small className='text-danger'>{errors.cname}</small>
+												)}
 											</div>
 											<div className='form-field'>
 												<label>Business Type</label>
@@ -244,24 +334,28 @@ const RegistrationModal = (props) => {
 												placeholder='Email'
 												onChange={handleChangej}
 											/>
-											{/* {!!errors.email && (
-                                          <small className="text-danger">{errors.email}</small>
-                                        )} */}
+											{!!errors.email && (
+												<small className='text-danger'>{errors.email}</small>
+											)}
 										</div>
 										<div className='form-field'>
-											<label htmlFor='password'>Email</label>
+											<label htmlFor='password'>Password</label>
 											<input
 												type='password'
 												name='password'
 												placeholder='******'
 												onChange={handleChangej}
 											/>
-											{/* {!!errors.password && (
-                                       <small className="text-danger">{errors.password}</small>
-                                      )} */}
+											{!!errors.password && (
+												<small className='text-danger'>{errors.password}</small>
+											)}
 										</div>
 										<div className='login-btns'>
-											<img src={robot} alt='' />
+											<Image
+												src='/public/Images/Bitmap.svg'
+												width={30}
+												height={30}
+											/>
 											<button type='submit'>Continue</button>
 										</div>
 									</form>

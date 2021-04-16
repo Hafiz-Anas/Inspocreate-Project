@@ -1,8 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
-import logoImg from '../../assets/Imgs/Group.svg';
-import searchIcon from '../../assets/Imgs/Shape.svg';
-import lockIcon from '../../assets/Imgs/Shape-2.svg';
+import React, { useState } from 'react';
+import Image from 'next/image';
 
 // SUB COMPONENTS
 import LoginModal from './components/loginModal';
@@ -17,18 +14,18 @@ const MainNavbar = () => {
 			<div className='main-navbar'>
 				<div className='main-navbar-wrapper'>
 					<div className='navbar-logo'>
-						<img src={logoImg} />
+						<Image src='/public/images/Group.svg' width={20} height={20} />
 						<h1>Inspocreate</h1>
 					</div>
 					<div className='search'>
 						<input type='text' placeholder='Try Women Empowerment' />
 						<button>
-							<img src={searchIcon} />
+							<Image src='/public/images/Shape.svg' width={20} height={20} />
 						</button>
 					</div>
 					<div className='navbar-btns'>
 						<button onClick={setShowLogin} className='navbar-btn-1'>
-							<img src={lockIcon} />
+							<Image src='/public/images/Shape-2.svg' width={20} height={20} />
 							Login
 						</button>
 						<button onClick={setShowJoin} className='navbar-btn-2'>

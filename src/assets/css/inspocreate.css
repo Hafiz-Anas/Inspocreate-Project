@@ -282,7 +282,7 @@ p {margin: 0;padding: 0;}
 }
 /*JOIN COMMIUNITY MODAL*/
 .join-modal {
-  width: 550px;
+  width: 571px;
 }
 .modal-header .user-type {
   display: flex;
@@ -296,10 +296,17 @@ p {margin: 0;padding: 0;}
   box-shadow: 0px 6px 10px rgba(131, 134, 163, .12);
   background: none;
   padding: 13px 60px;
-  font-size: 15px;
+  font-size: 18px;
   border-radius: 4px;
   margin: 0px 8px;
 }
+.selected {
+  border: 1px solid #A93A8C !important;
+  border-radius: 3px !important;
+  background-color: rgba(169, 58, 140, .10) !important;
+  padding: 12px 59px;
+}
+.selected span {color: #A93A8C}
 .join-modal .name-inputs {
   display: flex;
   justify-content: space-between;
@@ -521,6 +528,18 @@ p {margin: 0;padding: 0;}
   padding: 60px;
   font-weight: bold;
 }
+/*FOLLOWRS, FOLLOWINGS COLLECTIONS*/
+.followers-section .grid, .followings-section .grid, .collections-section .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1.5rem;
+}
+.user-in-profile {
+  border: 1px solid #E0E3E7;
+  border-radius: 5px;
+  box-shadow: 0px 6px 10px rgba(131, 134, 163, .12);
+}
+.followers-section .should-follow, .followings-section .should-follow {border-top: none; border-bottom: none}
 /*CONVERT USER TO COMPANY OR BACK TO USER MODAL*/
 .convert-user {
   position: absolute;
@@ -659,9 +678,16 @@ textarea {
   font-size: 17px;
 }
 .del-account {
-  text-align: end;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   cursor: pointer;
 }
+.del-account a {
+  display: flex;
+  align-items: center;
+}
+.del-account a span {color: #E48050; padding-right: 7px}
 /* USER NOTIFICATION */
 .notification {
   margin-top: 20px;
@@ -884,6 +910,7 @@ input:checked + .slider:before {
 .user-follow button:hover {
   background-color: #f8b3c5;
 }
+.user-post img {width: 100%;}
 .user-post img {width: 100%;}
 .profile-done {
   border-radius: 0;
@@ -1288,4 +1315,47 @@ input:checked + .slider:before {
   padding: 8px 16px;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
+}
+/*ADDED COMMENTS*/
+.added-comment-section {
+  margin-top: 20px;
+  width: 45%;
+}
+.added-comment-section .added-comment-heading {
+  font-size: 28px;
+}
+.added-comment .comment-details {
+}
+.added-comment .time-ago {
+  font-size: 12px;
+  color: #5C5F64;
+}
+.added-comment .comment-response {
+  display: flex;
+  justify-content: flex-end;
+}
+.added-comment .user-name p {
+  font-size: 14px;
+  color: #5C5F64;
+}
+.comment-response p {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  padding: 0px 10px;
+  border-left: 1px solid #E0E3E7;
+  cursor: pointer;
+}
+.comment-response p:first-child {border-left: 0}
+.comment-response p span {
+  font-size: 18px;
+  padding-right: 3px;
+}
+.reply {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 0;
+  margin-left: 50px;
 }

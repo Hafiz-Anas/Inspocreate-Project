@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Trending from './components/trending';
 import Latest from './components/latest';
 import Company from './components/company';
+import clsx from 'clsx';
 
 const Navbar = () => {
 	const [contentType, setContentType] = useState(
@@ -14,15 +15,28 @@ const Navbar = () => {
 			<div className='wrapper'>
 				<ul>
 					<li>
-						<button onClick={() => setContentType('trendings')}>
+						<button
+							className={clsx({ active: contentType === 'trendings' })}
+							onClick={() => setContentType('trendings')}
+						>
 							Trendings
 						</button>
 					</li>
 					<li>
-						<button onClick={() => setContentType('latest')}>Latest</button>
+						<button
+							className={clsx({ active: contentType === 'latest' })}
+							onClick={() => setContentType('latest')}
+						>
+							Latest
+						</button>
 					</li>
 					<li>
-						<button onClick={() => setContentType('company')}>Company</button>
+						<button
+							className={clsx({ active: contentType === 'trendcompanyings' })}
+							onClick={() => setContentType('company')}
+						>
+							Company
+						</button>
 					</li>
 				</ul>
 				{contentType === 'trendings' && (

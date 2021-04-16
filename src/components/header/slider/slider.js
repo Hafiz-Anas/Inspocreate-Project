@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import Slider from 'react-slick';
 import NextArrow from './nextArrow';
 import PrevArrow from './prevArrow';
-import checkIcon from '../../../assets/Imgs/checked.svg';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategories, selectCategories } from '../../../reducers';
@@ -45,7 +44,9 @@ const SwipeToSlide = () => {
 								onClick={() => handleClick(item.id)}
 								key={item.id}
 							>
-								{isSelected(item.id) && <img src={checkIcon} />}
+								{isSelected(item.id) && (
+									<img src='/public/images/checked.svg' />
+								)}
 								{item.title}
 							</button>
 						</div>

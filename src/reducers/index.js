@@ -2,3 +2,8 @@ export * from './posts';
 export * from './userSuggestions';
 export * from './categories';
 export * from './getSinglePost';
+export * from './comments';
+export * from './user';
+export * from './userSettings';
+export * from './convertAccount';
+export * from './followUnFollow';

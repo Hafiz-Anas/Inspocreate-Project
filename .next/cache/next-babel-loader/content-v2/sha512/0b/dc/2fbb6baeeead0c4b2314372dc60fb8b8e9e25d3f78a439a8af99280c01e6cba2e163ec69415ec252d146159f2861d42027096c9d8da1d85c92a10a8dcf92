@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './Activity';","map":{"version":3,"sources":["C:/Users/Digicrym/Documents/inspocreate/src/views/Activity/index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,YAAxB","sourcesContent":["export { default } from './Activity';\n"]},"metadata":{},"sourceType":"module"}

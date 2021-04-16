@@ -6,20 +6,24 @@ import {
 	dislikePostAction,
 	getSinglePost,
 	likePostAction,
+	createCommentThunk,
+	getCommentThunk,
 } from '../../../../../reducers';
 import { AuthContext } from '../../../../../context/auth';
 import AddToCollection from '../addToCollectionModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
+import Comment from './comment';
 
 const PostReview = () => {
 	//CONTEXT
 	const context = useContext(AuthContext);
+	const [comment, setComment] = useState('');
 	const params = useParams();
 
 	const dispatch = useDispatch();
 
-	//GET POST DATA API FROM REDUCER
+	// GET SINGLE POST FROM REDUCER
 	const singlePost = useSelector((state) => state.post);
 	useEffect(() => {
 		const id = params.postId;
@@ -40,11 +44,24 @@ const PostReview = () => {
 		const likes = post.likes.map((item) => item.id);
 		return likes.includes(context.state.id);
 	};
+
+	const handleChange = (e) => {
+		setComment(e.target.value);
+	};
+
+	const handleSubmit = (e) => {
+		dispatch(
+			createCommentThunk({
+				postId: params.postId,
+				text: comment,
+			})
+		);
+	};
 	return (
 		<div className='post-review-section wrapper'>
 			{!!singlePost.data && (
 				<div className='post-review-container activity'>
-					<div className='naem'>
+					<div>
 						<div className='scroll-post'>
 							<div className='post-author'>
 								<div className='author-icon-name'>
@@ -99,12 +116,14 @@ const PostReview = () => {
 								</p>
 							</div>
 						</div>
+						<Comment />
+						{/*ADD NEW COMMENT*/}
 						<div className='add-comment'>
-							<h2>Be The First To Write a Comment</h2>
+							{/*<h2>Be The First To Write a Comment</h2>*/}
 							<h2>Write your Comment</h2>
 							<div className='comment-input'>
-								<input type='text' />
-								<button>
+								<input type='text' value={comment} onChange={handleChange} />
+								<button onClick={handleSubmit}>
 									<span className='material-icons'>send</span>
 								</button>
 							</div>

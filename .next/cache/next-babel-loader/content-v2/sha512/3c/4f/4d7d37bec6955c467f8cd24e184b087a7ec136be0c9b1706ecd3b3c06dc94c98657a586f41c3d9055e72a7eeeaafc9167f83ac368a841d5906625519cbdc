@@ -1,0 +1,1 @@
+{"ast":null,"code":"export * from './slice';\nexport * from './thunk';","map":{"version":3,"sources":["C:/Users/Digicrym/Documents/inspocreate/src/reducers/user/index.js"],"names":[],"mappings":"AAAA,cAAc,SAAd;AACA,cAAc,SAAd","sourcesContent":["export * from './slice';\nexport * from './thunk';\n"]},"metadata":{},"sourceType":"module"}

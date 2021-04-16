@@ -1,5 +1,4 @@
-import React from 'react';
-import logoImg from '../../assets/Imgs/Group Copy.svg';
+import Image from 'next/image';
 
 const Footer = () => {
 	return (
@@ -7,7 +6,7 @@ const Footer = () => {
 			<div className='wrapper row'>
 				<div className='col-3 footer-col'>
 					<div className='navbar-logo'>
-						<img src={logoImg} />
+						<Image src='/images/Group Copy.svg' width={100} height={100} />
 						<h1>Inspocreate</h1>
 					</div>
 				</div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import plusIcontwo from '../../../../../assets/Imgs/Shape Copy 212.svg';
+import Image from 'next/image';
 import { AuthContext } from '../../../../../context/auth';
 import axios from '../../../../../axios';
 import { useHistory } from 'react-router-dom';
@@ -110,7 +110,12 @@ const LocalPost = () => {
 			<form className='add-post-form' onSubmit={pushPost}>
 				{!postState.image && (
 					<label className='add-img'>
-						<img src={plusIcontwo} />
+						<Image
+							src='/public/images/Shape Copy 212.svg'
+							alt='plusicon'
+							width={100}
+							height={100}
+						/>
 						<p>Add New</p>
 						<input type='file' hidden onChange={onChangeFile} />
 					</label>

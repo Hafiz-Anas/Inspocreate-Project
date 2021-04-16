@@ -33,7 +33,10 @@ const App = () => {
 										<Route path='/home' component={Home} />
 										<Route path='/Activity' component={Activity} />
 										{/* USER PROFILE */}
-										<Route path='/userProfile' component={UserProfile} />
+										<Route
+											path='/userProfile/:username'
+											component={UserProfile}
+										/>
 										{/* USER SETTINGS */}
 										<Route path='/userSettings' component={UserSettings} />
 										{/* CREATE PROFILE */}

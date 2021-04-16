@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Account from './components/account';
 import Interests from './components/interests';
 import Notification from './components/notification';
 import Privacy from './components/privacy';
 import clsx from 'clsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { userSettingsThunk } from '../../reducers';
 
 const UserSettings = () => {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(userSettingsThunk());
+	}, []);
 	const [settingFor, setSettingsFor] = useState(
 		'account',
 		'interests',

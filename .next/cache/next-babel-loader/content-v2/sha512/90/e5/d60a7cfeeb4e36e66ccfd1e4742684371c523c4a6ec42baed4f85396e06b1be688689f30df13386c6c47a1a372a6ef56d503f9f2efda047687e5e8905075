@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './userProfile';","map":{"version":3,"sources":["C:/Users/Digicrym/Documents/inspocreate/src/components/userProfile/index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,eAAxB","sourcesContent":["export { default } from './userProfile';\n"]},"metadata":{},"sourceType":"module"}

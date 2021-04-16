@@ -1,14 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 import Followers from './components/followers';
 import Following from './components/following';
 import Collection from './components/collection';
 import clsx from 'clsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserData, userToCampanyThunk } from '../../../../reducers';
+import { useParams } from 'react-router';
 
 const UserNavbar = () => {
 	const [show, setShow] = useState(false);
 
+	const [newName, setNewName] = useState('');
+
+	const params = useParams();
+	const dispatch = useDispatch();
+
+	const userData = useSelector((state) => state.userData);
+	useEffect(() => {
+		dispatch(getUserData(params.username));
+	}, []);
+
+	const handleChange = (e) => {
+		setNewName(e.target.value);
+	};
+	const convertAccount = () => {
+		dispatch(
+			userToCampanyThunk({
+				userId: 'string',
+				name: newName,
+				bType: 'string',
+			})
+		);
+	};
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
@@ -27,7 +52,8 @@ const UserNavbar = () => {
 								className={clsx({ active: userInfo === 'Followers' })}
 								onClick={() => setUserInfo('Followers')}
 							>
-								<h1>0</h1>Followers
+								<h1>{userData.data && userData.data.followers.length}</h1>
+								Followers
 							</button>
 						</li>
 						<li>
@@ -35,7 +61,8 @@ const UserNavbar = () => {
 								className={clsx({ active: userInfo === 'Following' })}
 								onClick={() => setUserInfo('Following')}
 							>
-								<h1>0</h1>Following
+								<h1>{userData.data && userData.data.followings.length}</h1>
+								Following
 							</button>
 						</li>
 						<li>
@@ -43,7 +70,8 @@ const UserNavbar = () => {
 								className={clsx({ active: userInfo === 'Collection' })}
 								onClick={() => setUserInfo('Collection')}
 							>
-								<h1>0</h1>Collection
+								<h1>{userData.data && userData.data.collections.length}</h1>
+								Collection
 							</button>
 						</li>
 					</ul>
@@ -68,7 +96,12 @@ const UserNavbar = () => {
 							<h1>Convert To Company</h1>
 							<div className='form-field'>
 								<label for='Company Name'>Company Name</label>
-								<input type='text' placeholder='Some Text Here' />
+								<input
+									onChange={handleChange}
+									type='text'
+									value={newName}
+									placeholder='Some Text Here'
+								/>
 							</div>
 							<div className='form-field'>
 								<label>Business Type</label>
@@ -83,7 +116,11 @@ const UserNavbar = () => {
 								</select>
 							</div>
 							<div className='form-submit'>
-								<button className='common-style-btn' type='submit'>
+								<button
+									className='common-style-btn'
+									onClick={convertAccount}
+									type='submit'
+								>
 									Convert To Company
 								</button>
 							</div>

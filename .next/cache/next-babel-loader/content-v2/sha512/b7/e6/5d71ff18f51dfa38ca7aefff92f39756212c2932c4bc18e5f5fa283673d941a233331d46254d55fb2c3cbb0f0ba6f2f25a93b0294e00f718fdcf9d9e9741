@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './postreview.';","map":{"version":3,"sources":["C:/Users/Digicrym/Documents/inspocreate/src/components/mainPages/components/activityPosts/postReview/index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,eAAxB","sourcesContent":["export { default } from './postreview.';\n"]},"metadata":{},"sourceType":"module"}

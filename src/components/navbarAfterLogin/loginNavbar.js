@@ -1,10 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import logoImg from '../../assets/Imgs/Group.svg';
-import searchIcon from '../../assets/Imgs/Shape.svg';
-import notiIcon from '../../assets/Imgs/gan.svg';
-import moreIcon from '../../assets/Imgs/Oval Copy.svg';
-import userIcon from '../../assets/Imgs/icon-5.svg';
+import { useHistory } from 'react-router-dom';
+import Image from 'next/image';
+import Link from 'next/link';
 import { Dropdown } from 'react-bootstrap';
 import { AuthContext } from '../../context/auth';
 // SUB COMPONENTS
@@ -12,6 +9,7 @@ import AddPostModal from './components/addPostModal';
 
 const MainNavbar = () => {
 	const context = useContext(AuthContext);
+	const history = useHistory();
 
 	// MODAL FOR CREATE POST
 	const [show, setShow] = useState(false);
@@ -19,6 +17,7 @@ const MainNavbar = () => {
 	// FUNCTION FOR USER LOGOUT
 	const logoutUser = () => {
 		context.actions.updateState(null);
+		history.push('./home');
 	};
 
 	return (
@@ -27,26 +26,31 @@ const MainNavbar = () => {
 				<div className='login-navbar-wrapper'>
 					<div className='left'>
 						<div className='navbar-logo'>
-							<img src={logoImg} />
+							<Image
+								src='/public/images/Group.svg'
+								alt='logo'
+								width={100}
+								height={100}
+							/>
 							<h1>Inspocreate</h1>
 						</div>
 						<ul className='main-links'>
 							<li>
-								<NavLink to='/activity'>
+								<Link href='/activity'>
 									<span className='material-icons'>home</span>
 									Activity
-								</NavLink>
+								</Link>
 							</li>
 							<li>
-								<NavLink to='/images'>
+								<Link href='/images'>
 									<span className='material-icons'>collections</span>Images
-								</NavLink>
+								</Link>
 							</li>
 							<li>
-								<NavLink to='/blog'>
+								<Link href='/blog'>
 									<span className='material-icons'>rss_feed</span>
 									Blog
-								</NavLink>
+								</Link>
 							</li>
 						</ul>
 					</div>
@@ -54,27 +58,51 @@ const MainNavbar = () => {
 						<div className='search'>
 							<input type='text' placeholder='Try Women Empowerment' />
 							<button>
-								<img src={searchIcon} />
+								<Image
+									src='/public/images/Shape.svg'
+									alt='searchIcon'
+									width={100}
+									height={100}
+								/>
 							</button>
 						</div>
 						<ul className='user-seciton'>
 							<li>
-								<img src={notiIcon} />
+								<Image
+									src='/public/images/gan.svg'
+									alt='notification'
+									width={100}
+									height={100}
+								/>
 							</li>
 							<li>
 								<button onClick={setShow}>
-									<img src={userIcon} />
+									<Image
+										src='/public/images/icon-5.svg'
+										alt='user'
+										width={100}
+										height={100}
+									/>
 									Add Post
 								</button>
 							</li>
 							<Dropdown>
 								<Dropdown.Toggle className='user-select' id='dropdown-basic'>
 									<li>
-										<img className='userIcon' src={moreIcon} />
+										<Image
+											className='userIcon'
+											src='/public/images/Oval Copy.svg'
+											alt='More'
+											width={100}
+											height={100}
+										/>
 									</li>
 								</Dropdown.Toggle>
 								<Dropdown.Menu>
-									<Dropdown.Item className='dropdown-item' href='/userProfile'>
+									<Dropdown.Item
+										className='dropdown-item'
+										// href={`/userProfile/${context.state.username}`}
+									>
 										Profile
 									</Dropdown.Item>
 									<Dropdown.Item className='dropdown-item' href='/userSettings'>

@@ -1,6 +1,22 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { changeSettingsThunk } from '../../../reducers';
 
 const Privacy = () => {
+	const dispatch = useDispatch();
+	const updateSettings = () => {
+		dispatch(
+			changeSettingsThunk({
+				firstName: 'string',
+				lastName: 'string',
+				username: 'string',
+				bio: 'string',
+				website: 'string',
+				password: 'string',
+				rType: 'User',
+			})
+		);
+	};
 	return (
 		<div className='wrapper privacy-settings'>
 			<div className='privacy'>
@@ -20,7 +36,9 @@ const Privacy = () => {
 						of you adding/sharing the item
 					</p>
 				</div>
-				<button className='common-style-btn'>Save Settings</button>
+				<button className='common-style-btn' onClick={updateSettings}>
+					Save Settings
+				</button>
 			</div>
 		</div>
 	);

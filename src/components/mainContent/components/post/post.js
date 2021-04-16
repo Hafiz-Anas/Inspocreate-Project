@@ -1,7 +1,6 @@
 import React from 'react';
-import userIcon from '../icons/Oval Copy222.svg';
-import plusIcon from '../icons/Shape Copy 21.svg';
-import likeIcon from '../icons/Path Copy 47.svg';
+
+import Image from 'next/image';
 
 const Post = () => {
 	return (
@@ -12,7 +11,11 @@ const Post = () => {
 					<div className='desc'>
 						<div className='flex user'>
 							<div>
-								<img src={userIcon} />
+								<Image
+									src='/public/Images/userIcon2.svg'
+									width={20}
+									height={20}
+								/>
 							</div>
 							<div>
 								<p>UserName</p>
@@ -20,7 +23,11 @@ const Post = () => {
 						</div>
 						<div className='flex add'>
 							<div>
-								<img src={plusIcon} />
+								<Image
+									src='/public/Images/plusIcon.svg'
+									width={20}
+									height={20}
+								/>
 							</div>
 							<div>
 								<p>Add to Collection</p>
@@ -28,7 +35,11 @@ const Post = () => {
 						</div>
 						<div className='flex like'>
 							<div>
-								<img src={likeIcon} />
+								<Image
+									src='/public/Images/likeIcon.svg'
+									width={20}
+									height={20}
+								/>
 							</div>
 							<div>
 								<p>Like</p>

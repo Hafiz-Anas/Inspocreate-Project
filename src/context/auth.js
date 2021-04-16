@@ -1,4 +1,5 @@
 import React, { Component, createContext } from 'react';
+import cookie from 'js-cookie';
 
 export const AuthContext = createContext({
 	state: null,
@@ -10,7 +11,7 @@ export const AuthContext = createContext({
 export class AuthContextProvider extends Component {
 	constructor(props) {
 		super(props);
-		const user = localStorage.getItem('currentUser');
+		const user = props.user;
 		if (user) {
 			try {
 				const userObject = JSON.parse(user);
@@ -24,12 +25,12 @@ export class AuthContextProvider extends Component {
 	updateState = (state) => {
 		if (state) {
 			const user = JSON.stringify(state);
-			localStorage.setItem('currentUser', user);
+			cookie.set('user', user, { expires: 7 });
 			if (state.token) {
-				localStorage.setItem('token', state.token);
+				cookie.set('user', state.token);
 			}
 		} else {
-			localStorage.clear();
+			cookie.remove('user');
 		}
 		this.setState(state);
 	};
@@ -46,4 +47,8 @@ export class AuthContextProvider extends Component {
 			</AuthContext.Provider>
 		);
 	}
+}
+export function getServerSideProps({ req, res }) {
+	console.log('AuthContextProvider => getServerSideProps => ', req.cookies);
+	return { props: { user: req.cookies.user || '' } };
 }

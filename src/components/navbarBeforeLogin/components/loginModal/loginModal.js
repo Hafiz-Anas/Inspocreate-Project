@@ -2,70 +2,66 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from '../../../../axios';
 import { AuthContext } from '../../../../context/auth';
-import fbIcon from '../../../../assets/Imgs/Fill 1.svg';
-import gIcon from '../../../../assets/Imgs/Grou.svg';
-import robot from '../../../../assets/Imgs/Bitmap.svg';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+import Image from 'next/image';
 
 const LoginModal = (props) => {
 	const handleCloseLogin = () => props.setShowLogin(false);
 
-	//  //  FORM VALIDATION
-	// const [state, setState] = useState({
-	//   email:'',
-	//   password:''
-	// });
-	// const [errors, setErrors] = useState({
-	//   email:'',
-	//   password:''
-	// });
-	// const handleChange = (event) => {
-	//   setState({
-	//     ...state,
-	//     [event.target.name]: event.target.value
-	//   })
-
-	//   if(event.target.name === 'email'){
-	//     if(event.target.value.indexOf('@') === -1){
-	//       setErrors({
-	//         ...errors,
-	//         email: "Invalid Email Address"
-	//       })
-	//     }else{
-	//       setErrors({
-	//         ...errors,
-	//         email: ""
-	//       })
-	//     }
-	//   }
-	//   if(event.target.name === 'password'){
-	//     if(event.target.value.length < 8){
-	//       setErrors({
-	//         ...errors,
-	//         password: "Please Enter Correct Password"
-	//       })
-	//     }else{
-	//       setErrors({
-	//         ...errors,
-	//         password: ""
-	//       })
-	//     }
-	//   }
-	// }
-
 	const authContext = useContext(AuthContext);
 	const history = useHistory();
 
+	//  FORM VALIDATION
+	const [state, setState] = useState({
+		email: '',
+		password: '',
+	});
+	const [errors, setErrors] = useState({
+		email: '',
+		password: '',
+	});
 	const [loginState, setLoginState] = useState({
 		email: '',
 		password: '',
 	});
-	const handleChange = (e) => {
+	const handleChange = (event) => {
 		const newState = { ...loginState };
-		newState[e.target.name] = e.target.value;
+		newState[event.target.name] = event.target.value;
 		setLoginState({
 			...newState,
 		});
+
+		setState({
+			...state,
+			[event.target.name]: event.target.value,
+		});
+
+		if (event.target.name === 'email') {
+			if (event.target.value.indexOf('@') === -1) {
+				setErrors({
+					...errors,
+					email: 'Invalid Email Address',
+				});
+			} else {
+				setErrors({
+					...errors,
+					email: '',
+				});
+			}
+		}
+		if (event.target.name === 'password') {
+			if (event.target.value.length < 8) {
+				setErrors({
+					...errors,
+					password: 'Please Enter Correct Password',
+				});
+			} else {
+				setErrors({
+					...errors,
+					password: '',
+				});
+			}
+		}
 	};
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -86,7 +82,7 @@ const LoginModal = (props) => {
 	return (
 		<div>
 			<Modal
-				size='lg'
+				size='md'
 				className='login-modal'
 				centered
 				show={props.showLogin}
@@ -103,11 +99,11 @@ const LoginModal = (props) => {
 						</div>
 						<div className='login-btns'>
 							<button className='fb-login'>
-								<img src={fbIcon} />
+								<Image src='/public/Images/Fill 1.svg' width={30} height={30} />
 								Sign Up With Facebook
 							</button>
 							<button className='g-login'>
-								<img src={gIcon} />
+								<Image src='/public/Images/Grou.svg' width={30} height={30} />
 								Sign Up With Google
 							</button>
 						</div>
@@ -123,9 +119,9 @@ const LoginModal = (props) => {
 									onChange={handleChange}
 									placeholder='Email'
 								/>
-								{/* {!!errors.email && (
-                                    <small className="text-danger">{errors.email}</small>
-                                )} */}
+								{!!errors.email && (
+									<small className='text-danger'>{errors.email}</small>
+								)}
 							</div>
 							<div className='form-field'>
 								<label htmlFor='password'>Password</label>
@@ -135,13 +131,27 @@ const LoginModal = (props) => {
 									onChange={handleChange}
 									placeholder='******'
 								/>
-								{/* {!!errors.password && (
-                                   <small className="text-danger">{errors.password}</small>
-                                )} */}
+								{!!errors.password && (
+									<small className='text-danger'>{errors.password}</small>
+								)}
 							</div>
 							<div className='login-btns'>
-								<img src={robot} alt='' />
-								<button type='submit'>Continue</button>
+								<Image src='/public/Images/Bitmap.svg' width={30} height={30} />
+								<button
+									type='submit'
+									onClick={() => {
+										// cookie.set("token", "ABCD", { expires: 1 / 24 });
+										fetch('/api/login', {
+											method: 'post',
+											headers: {
+												'Content-Type': 'application/json',
+											},
+											body: JSON.stringify({ token: 'token' }),
+										});
+									}}
+								>
+									Continue
+								</button>
 							</div>
 						</form>
 					</div>
